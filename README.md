@@ -23,14 +23,19 @@ doppler_bin: 8            # Doppler bin location of the point (total bins = num 
 bearing: 38.6818885803    # Radar measured angle in degrees (right positive)
 intensity: 13.6172780991  # Radar measured intensity in dB
 ```
-[For more information about the ROS package used to collect data and its description, please click here!](https://github.com/radar-lab/mm-fall)
+[For more information about the ROS package used to collect data and its description, please click here!](https://github.com/radar-lab/mmfall)
+
 
 ## Data Preprocessing
-Data preprocessing is done by extracting by the voxels. Voxel extraction code is available [here.](https://github.com/nesl/RadHAR/tree/master/DataPreprocessing). The file have variables which need to be set to the path of the raw data folders. The path is controlled using the below variables.
+Data preprocessing is done by extracting by the voxels. Voxel extraction code is available [here.](https://github.com/YiShan8787/mm-behavior/tree/master/DataPreprocessing). The file have variables which need to be set to the path of the raw data folders. The path is controlled using the below variables.
+
+We use the archetechture of [RedHAR!](https://github.com/nesl/RadHAR), and speed up the trainning time by replacing the three while loop to three if loop.
+
+The time cost of origin three while loop is about 2~4 seconds per sample(60 frames), after accelerating it cost 0.1 seconds per sample(60 frames).
 
 ```
 parent_dir = 'Path_to_training_or_test_data'
-sub_dirs=['boxing','jack','jump','squats','walk']
+sub_dirs=['stand','swing']
 extract_path = 'Path_to_put_extracted_data'
 ```
 
@@ -43,11 +48,10 @@ extract_path = 'Path_to_put_extracted_data'
 Finally the voxels have the format: 60\*10\*32\*32, where 60 represents the time, 10 represent the depth, and 32\*32 represents the x and y dimension. 
 
 ## Classifiers:
-- Bi-directional LSTM Classifier: [Code]()
+- Bi-directional LSTM Classifier: [Code](https://github.com/YiShan8787/mm-behavior/blob/master/Classifiers/LSTM2.py)
 
 ## Pretrained Classifiers and Preprocessed Dataset:
+- Bi-directional LSTM Model: [Model](https://github.com/YiShan8787/mm-behavior/tree/master/Data/model)
 
-## Reference:
-- https://github.com/nesl/RadHAR
 
 
