@@ -68,7 +68,7 @@ we use the doppler pattern defined by [patient_monitor!](https://github.com/rada
 ```
 ## training
 ```
-python Classifiers/doppler/bin_ti_mds_cnn.py
+ python Classifiers/doppler/bin_ti_mds_cnn.py
 ```
 
 
