@@ -60,11 +60,11 @@ Finally the voxels have the format: 60\*10\*32\*32, where 60 represents the time
 ## doppler pattern
 we use the doppler pattern defined by [patient_monitor!](https://github.com/radar-lab/patient_monitoring)
 ## preprocessing
-  #first step - truncate the first & last 0.5 sec, because of the noise
-  sh Data/new_data/preprocessing.sh
-  #second step - change the bag file to npy ( for trainning )
-  python DataPreprocessing/doppler/md_bin_batch.py
+- first step - truncate the first & last 0.5 sec, because of the noise
+- sh Data/new_data/preprocessing.sh
+- #second step - change the bag file to npy ( for trainning )
+- python DataPreprocessing/doppler/md_bin_batch.py
 ## training
-  python Classifiers/doppler/bin_ti_mds_cnn.py
+- python Classifiers/doppler/bin_ti_mds_cnn.py
 
 
