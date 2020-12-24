@@ -66,6 +66,13 @@ we use the doppler pattern defined by [patient_monitor!](https://github.com/rada
   #second step - change the bag file to npy ( for trainning )
   python DataPreprocessing/doppler/md_bin_batch.py
 ```
+## preprocessing(for fall_down, roll_down, etc)
+'''
+  #first step - out put the video in the topic
+  python bag2video.py [topic] [bagfile]  # we use the source code from [!bag2file](https://github.com/OSUrobotics/bag2video)
+  #second step - extract the exactly behavior duration by the video
+  sh Data/new_data/preprocessing.sh
+'''
 ## training
 ```
  python Classifiers/doppler/bin_ti_mds_cnn.py
