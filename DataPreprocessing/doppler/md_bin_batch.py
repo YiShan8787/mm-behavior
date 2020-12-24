@@ -11,7 +11,8 @@ import os
 
 class micro_doppler_signature_proc:
     def __init__(self):
-        self.behaviors = ['arm_moving','boxing','jump','kick_leg','morning_exercise','raise','run','stride','swing']
+        #self.behaviors = ['arm_moving','boxing','jump','kick_leg','morning_exercise','raise','run','stride','swing']
+        self.behaviors = ['boxing','jump','swing','run','raise']
         self.bagsrcdir  = '/home/wt/RadHARex/Data/new_data/' 
         self.csvdir     = '/home/wt/RadHARex/Data/new_data/'     
 

@@ -19,15 +19,17 @@ from mds_dict import mds_dict
 
 class mds_dl:
 	def __init__(self):
-		self.behaviors = ['arm_moving','boxing','jump','kick_leg','morning_exercise','raise','run','stride','swing']
+		#self.behaviors = ['arm_moving','boxing','jump','kick_leg','morning_exercise','raise','run','stride','swing']
+		self.behaviors = ['boxing','jump','swing','run','raise']
 		#self.directory = '/home/wt/RadHARex/Data/DopplerTrain/'
 		self.directory = '/home/wt/RadHARex/Data/new_data/'
 		#self.test_file = './output/test.npy'
 		self.nd = 64
 		self.time_domain_bins = 10
 		self.p_test = .1				# Test samples percent
-		self.p_validation = .2			# Validation samples percent
-		self.checkpoint_model_path = './output/mds_cnn_model.h5'
+		self.p_validation = .3			# Validation samples percent
+		#self.checkpoint_model_path = './output/mds_cnn_model.h5'
+		self.checkpoint_model_path = './output'
 
 	def load(self):
 		ts=time()
@@ -128,13 +130,13 @@ class mds_dl:
 		print('Saved model to disk.')
 
 		# 绘制训练 & 验证的准确率值
-		'''
+		
 		plt.plot(model_train.history['accuracy'])
 		plt.plot(model_train.history['val_accuracy'])
 		plt.title('Model accuracy')
 		plt.ylabel('Accuracy')
 		plt.xlabel('Epoch')
-		plt.legend(['Train', 'Test'], loc='upper left')
+		plt.legend(['Train', 'Validation'], loc='upper left')
 		plt.show()
 
 		# 绘制训练 & 验证的损失值
@@ -143,9 +145,9 @@ class mds_dl:
 		plt.title('Model loss')
 		plt.ylabel('Loss')
 		plt.xlabel('Epoch')
-		plt.legend(['Train', 'Test'], loc='upper left')
+		plt.legend(['Train', 'Validation'], loc='upper left')
 		plt.show()
-		'''
+		
 	def model_predict(self):
 		# json_file = open('./output/model.json', 'r')
 		# loaded_model_json = json_file.read()
@@ -184,14 +186,28 @@ class mds_dl:
 			print(pred.shape)
 			pred_array   = []
 			true_positive = 0
+			all_number_7 = 0
+			all_number_8 = 0
+			true_positive_7 = 0
+			true_positive_8 = 0
 			all_number = pred.shape[0]
 			for i,number in enumerate(pred):
 				idx = np.argmax(number)
+				if number[idx] >0.7:
+					all_number_7 = all_number_7+1
+					if idx == gt:
+						true_positive_7 = true_positive_7 +1
+				if number[idx] >0.8:
+					all_number_8 = all_number_8+1
+					if idx == gt:
+						true_positive_8 = true_positive_8 +1
 				pred_array.append(idx)
 				if idx == gt:
 					true_positive = true_positive+1
 			print("acc:",true_positive/all_number)
-			f.write(str(true_positive/all_number) + "\n")
+			f.write( behavior +" : "+ str(true_positive/all_number) + "\n")
+			f.write("T=0.7: " + str(true_positive_7/all_number_7) + "\n")
+			f.write("T=0.8: " + str(true_positive_8/all_number_8) + "\n")
 			gt=gt+1
 		f.close()
 			
